@@ -4,8 +4,9 @@ import com.intellij.ide.RecentProjectsManagerBase
 import com.intellij.openapi.project.Project
 import com.intellij.platform.ModuleAttachProcessor
 import git4idea.GitUtil
+import kotlinx.coroutines.CoroutineScope
 
-class GitAwareRecentProjectsManager : RecentProjectsManagerBase() {
+class GitAwareRecentProjectsManager(coroutineScope: CoroutineScope) : RecentProjectsManagerBase(coroutineScope) {
     override fun getProjectDisplayName(project: Project): String {
         val baseName = ModuleAttachProcessor.getMultiProjectDisplayName(project) ?: project.name
         val currentBranch = getCurrentBranch(project)
