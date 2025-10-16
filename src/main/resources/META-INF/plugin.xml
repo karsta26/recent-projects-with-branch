@@ -17,6 +17,9 @@
     This plugins adds current git branch name to a Recent Projects menu and IDE startup wizard.
   ]]></description>
 
+    <!-- Product and plugin compatibility requirements -->
+    <idea-version since-build="251" until-build="263.*"/>
+
     <depends>com.intellij.modules.platform</depends>
     <depends>Git4Idea</depends>
 

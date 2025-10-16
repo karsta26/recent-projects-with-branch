@@ -9,11 +9,12 @@ import kotlinx.coroutines.CoroutineScope
 class GitAwareRecentProjectsManager(coroutineScope: CoroutineScope) : RecentProjectsManagerBase(coroutineScope) {
     override fun getProjectDisplayName(project: Project): String {
         val baseName = ModuleAttachProcessor.getMultiProjectDisplayName(project) ?: project.name
-        val currentBranch = getCurrentBranch(project)
-        if (currentBranch != null) {
-            return "$baseName [@${currentBranch}]"
+        val currentBranch = getCurrentBranch(project) ?: return baseName
+        val suffix = "[${currentBranch}]"
+        if (baseName.endsWith(suffix)) {
+            return baseName
         }
-        return baseName
+        return "$baseName $suffix"
     }
 
     private fun getCurrentBranch(project: Project): String? {
